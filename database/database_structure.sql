@@ -1,0 +1,62 @@
+PRAGMA journal_mode = OFF;
+
+CREATE TABLE IF NOT EXISTS tasks(
+	id INTEGER PRIMARY KEY,
+	name TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS questions(
+	id INTEGER PRIMARY KEY,
+	task_id INTEGER NOT NULL,
+	question TEXT NOT NULL,
+	question_with_hidden TEXT,
+	display_type TEXT NOT NULL
+);
+
+
+
+CREATE TABLE IF NOT EXISTS answers(
+	id INTEGER PRIMARY KEY,
+	question_id INTEGER NOT NULL,
+	answer TEXT NOT NULL,
+	is_right BOOL
+);
+
+CREATE TABLE IF NOT EXISTS history(
+	id INTEGER PRIMARY KEY,
+	submit_date TEXT NOT NULL,
+	user_id INTEGER NOT NULL,
+	task_id INTEGER NOT NULL,
+	question_id INTEGER NOT NULL,
+	is_in_progress BOOL NOT NULL,
+	is_right BOOL
+);
+
+CREATE TABLE IF NOT EXISTS users(
+	id INTEGER PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	first_name TEXT,
+	last_name TEXT,
+	tag TEXT
+);
+
+CREATE TABLE IF NOT EXISTS selected_answers(
+	id INTEGER PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	answer_id INTEGER NOT NULL,
+	question_id INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS selected(
+	id INTEGER PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	task_id INTEGER NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS task_page(
+	id INTEGER PRIMARY KEY,
+	user_id INTEGER NOT NULL,
+	page INTEGER NOT NULL
+);
+
